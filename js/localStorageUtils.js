@@ -1,7 +1,6 @@
 export const localStorageUtils = {
     get: (key) => {
         const data = localStorage.getItem(key)
-        if (!data) return null
         try {
             return JSON.parse(data)
         } catch {
@@ -10,7 +9,7 @@ export const localStorageUtils = {
     },
 
     set: (key, data) => {
-        localStorage.setItem(key, data)
+        localStorage.setItem(key, JSON.stringify(data))
     },
     remove: (key) => {
         localStorage.removeItem(key)

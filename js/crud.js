@@ -3,15 +3,16 @@ import {fetchMockUsers} from "./fetchMock.js";
 
 const userLocalStorageKey = "userList";
 export const startUp = async () => {
-    const data = localStorageUtils.get(userLocalStorageKey)
+    const data = localStorageUtils.get(userLocalStorageKey);
+
     if (data) {
-        return data.users;
+        return data;
     }
+
     const newData = await fetchMockUsers();
-    localStorage.setItem(userLocalStorageKey, JSON.stringify(newData.users));
+    localStorageUtils.set(userLocalStorageKey, newData);
     return newData;
 }
-
 export const getUserById = (id) => {
     const data = localStorageUtils.get(userLocalStorageKey);
 
