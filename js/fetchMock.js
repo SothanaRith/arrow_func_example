@@ -1,4 +1,4 @@
-async function fetchMockUsers() {
+export async function fetchMockUsers() {
     try {
         const response = await fetch('https://dummyjson.com/users');
         const data = await response.json();
@@ -9,4 +9,5 @@ async function fetchMockUsers() {
         throw error;
     }
 }
+
 
