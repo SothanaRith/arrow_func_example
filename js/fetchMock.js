@@ -1,7 +1,12 @@
-
 async function fetchMockUsers() {
-    fetch('https://dummyjson.com/users')
-    .then(res => res.json())
-    .then(console.log);
+    try {
+        const response = await fetch('https://dummyjson.com/users');
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        throw error;
+    }
 }
 
