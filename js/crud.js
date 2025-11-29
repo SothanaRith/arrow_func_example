@@ -1,4 +1,5 @@
-import {localStorageUtils} from "./localStorageUtils";
+import {localStorageUtils} from "./localStorageUtils.js";
+import {fetchMockUsers} from "./fetchMock.js";
 
 const userLocalStorageKey = "userList";
 export const startUp = async () => {

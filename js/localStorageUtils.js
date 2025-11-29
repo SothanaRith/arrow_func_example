@@ -10,7 +10,7 @@ export const localStorageUtils = {
     },
 
     set: (key, data) => {
-        localStorage.setItem(key, JSON.stringify(data))
+        localStorage.setItem(key, data)
     },
     remove: (key) => {
         localStorage.removeItem(key)
