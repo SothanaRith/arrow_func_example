@@ -40,7 +40,7 @@ export const updateUserById = (id, users, newData)=>{
     return users;
 }
 
-export const addUser = (users,newData){
+export const addUser = (users,newData)=>{
     const data = localStorageUtils.get(userLocalStorageKey);
     if (!users || !Array.isArray(users)) return null;   
     
