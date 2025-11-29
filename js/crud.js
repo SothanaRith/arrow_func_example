@@ -8,7 +8,7 @@ export const startUp = async () => {
         return data.users;
     }
     const newData = await fetchMockUsers();
-    localStorage.setItem(userLocalStorageKey, newData.users);
+    localStorage.setItem(userLocalStorageKey, JSON.stringify(newData.users));
     return newData;
 }
 
