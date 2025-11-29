@@ -27,3 +27,27 @@ export const deleteUserById = (id, users) => {
     return newArray;
 }
 
+
+
+export const updateUserById = (id, users, newData)=>{
+    if (!users || !Array.isArray(users)) return null;
+    
+    const update_index = users.indexOf(user=> user.id == id)
+    users[update_index] = newData;
+    
+    localStorageUtils.set(userLocalStorageKey, users);
+
+    return users;
+}
+
+export const addUser = (users,newData){
+    const data = localStorageUtils.get(userLocalStorageKey);
+    if (!users || !Array.isArray(users)) return null;   
+    
+    data.append(newData)
+
+    localStorageUtils.set(userLocalStorageKey, data);
+
+    return users
+
+}
