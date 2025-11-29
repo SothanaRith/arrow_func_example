@@ -24,7 +24,7 @@ export const getUserById = (id) => {
 
 export const deleteUserById = (id, users) => {
     if (!users || !Array.isArray(users)) return null;
-    const newArray = [...users.filter(item => item.id !== id)];
+    const newArray = users.filter(item => item.id !== id);
     localStorageUtils.set(userLocalStorageKey, {users: newArray});
     return newArray;
 }
