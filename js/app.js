@@ -1,30 +1,6 @@
-import { localStorageUtils } from "./localStorageUtils.js";
-import {fetchMockUsers} from "./fetchMock";
+import { localStorageUtils, fetchMockUsers } from "./localStorageUtils.js";
 
-let data = {
-    users: [
-        {
-            id: 1,
-            firstName: "Emily",
-            lastName: "Johnson",
-            email: "emily.johnson@x.dummyjson.com",
-            role: "admin",
-            image: "https://i.pravatar.cc/150?img=1"
-        },
-        {
-            id: 2,
-            firstName: "Mark",
-            lastName: "Davidson",
-            email: "mark@demo.com",
-            role: "user",
-            image: "https://i.pravatar.cc/150?img=5"
-        }
-    ]
-};
-
-const userData = await fetchMockUsers()
-
-console.log(userData)
+const data = await fetchMockUsers()
 
 const userList = document.getElementById("userList");
 const modal = document.getElementById("editModal");
@@ -69,9 +45,6 @@ function renderUsers() {
         });
 
         card.querySelector(".delete-btn").addEventListener("click", () => {
-            const confirmed = confirm(`Delete ${user.firstName}?`);
-            if (!confirmed) return;
-
             data.users = data.users.filter(u => u.id !== user.id);
             renderUsers();
         });
