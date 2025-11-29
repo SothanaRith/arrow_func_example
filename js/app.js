@@ -1,3 +1,6 @@
+import { localStorageUtils } from "./localStorageUtils.js";
+import {fetchMockUsers} from "./fetchMock";
+
 let data = {
     users: [
         {
@@ -18,6 +21,10 @@ let data = {
         }
     ]
 };
+
+const userData = await fetchMockUsers()
+
+console.log(userData)
 
 const userList = document.getElementById("userList");
 const modal = document.getElementById("editModal");

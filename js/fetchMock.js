@@ -1,4 +1,5 @@
-export async function fetchMockUsers() {
+
+export const fetchMockUsers = async (req, res) => {
     try {
         const response = await fetch('https://dummyjson.com/users');
         const data = await response.json();
