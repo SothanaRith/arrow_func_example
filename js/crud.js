@@ -10,6 +10,7 @@ export const startUp = async () => {
     }
 
     const newData = await fetchMockUsers();
+    console.log(newData)
     localStorageUtils.set(userLocalStorageKey, newData);
     return newData;
 }
@@ -24,30 +25,30 @@ export const getUserById = (id) => {
 export const deleteUserById = (id, users) => {
     if (!users || !Array.isArray(users)) return null;
     const newArray = [...users.filter(item => item.id !== id)];
-    localStorageUtils.set(userLocalStorageKey, newArray);
+    localStorageUtils.set(userLocalStorageKey, {users: newArray});
     return newArray;
 }
 
 
 
-export const updateUserById = (id, users, newData)=>{
-    if (!users || !Array.isArray(users)) return null;
-    
-    const update_index = users.indexOf(user=> user.id == id)
-    users[update_index] = newData;
-    
+export const updateUserById = async (newData)=>{
+    let users = await startUp();
+    if (!users) return null;
+
+    const update_index = users.users.findIndex(user=> user.id === newData.id)
+    users.users[update_index] = newData;
     localStorageUtils.set(userLocalStorageKey, users);
 
     return users;
 }
 
-export const addUser = (users,newData)=>{
-    const data = localStorageUtils.get(userLocalStorageKey);
-    if (!users || !Array.isArray(users)) return null;   
-    
-    data.append(newData)
+export const addUser = async (newData)=>{
+    let users = await startUp();
+    if (!users.users || !Array.isArray(users.users)) return null;
 
-    localStorageUtils.set(userLocalStorageKey, data);
+    users.users.push(newData)
+
+    localStorageUtils.set(userLocalStorageKey, users);
 
     return users
 

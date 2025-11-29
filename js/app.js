@@ -1,9 +1,10 @@
 import { localStorageUtils } from "./localStorageUtils.js";
-import { startUp } from "./crud.js";
-const data = await startUp()
+import {startUp, updateUserById, deleteUserById, getUserById, addUser} from "./crud.js";
+let data = await startUp()
 
 const userList = document.getElementById("userList");
 const modal = document.getElementById("editModal");
+const addModal = document.getElementById("addModal");
 
 let editingUser = null;
 
@@ -44,8 +45,9 @@ function renderUsers() {
             modal.style.display = "flex";
         });
 
-        card.querySelector(".delete-btn").addEventListener("click", () => {
-            data.users = data.users.filter(u => u.id !== user.id);
+        card.querySelector(".delete-btn").addEventListener("click", async () => {
+            deleteUserById(user.id, data.users)
+            data = await startUp()
             renderUsers();
         });
 
@@ -57,13 +59,43 @@ document.getElementById("cancelEdit").onclick = () => {
     modal.style.display = "none";
 };
 
-document.getElementById("saveEdit").onclick = () => {
+document.getElementById("saveEdit").onclick = async () => {
+
     editingUser.firstName = document.getElementById("editFirstName").value;
     editingUser.lastName = document.getElementById("editLastName").value;
     editingUser.email = document.getElementById("editEmail").value;
     editingUser.role = document.getElementById("editRole").value;
 
+    await updateUserById(editingUser)
+    data = await startUp()
     modal.style.display = "none";
+    renderUsers();
+};
+
+document.getElementById("addUserBtn").onclick = () => {
+    addModal.style.display = "flex";
+};
+
+document.getElementById("cancelAdd").onclick = () => {
+    addModal.style.display = "none";
+};
+
+document.getElementById("saveAdd").onclick = async () => {
+    const newUser = {
+        id: Date.now(), // simple auto-ID
+        firstName: document.getElementById("newFirstName").value,
+        lastName: document.getElementById("newLastName").value,
+        email: document.getElementById("newEmail").value,
+        role: document.getElementById("newRole").value,
+        image: document.getElementById("newImage").value || "default.png"
+    };
+
+    data.users.push(newUser);
+
+    await addUser(newUser)
+
+    addModal.style.display = "none";
+    data = await startUp()
     renderUsers();
 };
 

@@ -8,12 +8,29 @@
 </head>
 
 <body>
+<button id="addUserBtn">➕ Add User</button>
+
+<div id="addModal" class="modal">
+  <div class="modal-content">
+    <h2>Add User</h2>
+    <input id="newFirstName" placeholder="First Name">
+    <input id="newLastName" placeholder="Last Name">
+    <input id="newEmail" placeholder="Email">
+    <input id="newRole" placeholder="Role">
+    <input id="newImage" placeholder="Image URL">
+
+    <div class="btn-row">
+      <button id="cancelAdd">Cancel</button>
+      <button id="saveAdd">Save</button>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <h2>User List</h2>
   <div class="user-list" id="userList"></div>
 </div>
 
-<!-- Modal -->
 <div class="modal" id="editModal">
   <div class="modal-content">
     <h3>Edit User</h3>
@@ -48,6 +65,7 @@
     </div>
   </div>
 </div>
+
 <script type="module" src="js/app.js" defer></script>
 </body>
 </html>

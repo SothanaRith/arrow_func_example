@@ -10,5 +10,3 @@ export const fetchMockUsers = async (req, res) => {
         throw error;
     }
 }
-
-
