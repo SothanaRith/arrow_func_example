@@ -1,6 +1,6 @@
-import { localStorageUtils, fetchMockUsers } from "./localStorageUtils.js";
-
-const data = await fetchMockUsers()
+import { localStorageUtils } from "./localStorageUtils.js";
+import { startUp } from "./crud.js";
+const data = await startUp()
 
 const userList = document.getElementById("userList");
 const modal = document.getElementById("editModal");
